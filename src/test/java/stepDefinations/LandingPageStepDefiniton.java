@@ -13,7 +13,7 @@ import io.cucumber.java.en.When;
 import junit.framework.Assert;
 
 
-public class GreenKartStepDefiniton {
+public class LandingPageStepDefiniton {
 	public String landinPageproductName;
 	public String offerPage;
 	public WebDriver driver;
@@ -42,10 +42,10 @@ public class GreenKartStepDefiniton {
 	       
 	    
 	     	driver.findElement(By.linkText("Top Deals")).click();
-	     	Set <String> s1= driver.getWindowHandles();
-	     	Iterator <String> i1=s1.iterator();
-	     	String parentWindow = i1.next();
-	     	String childWindow= i1.next();
+	     	Set <String> s1= driver.getWindowHandles(); //recuento total de ventanass abiertas
+	     	Iterator <String> i1=s1.iterator(); //recupera las ventanas y empeiza a contar
+	     	String parentWindow = i1.next(); //ventana princuoal
+	     	String childWindow= i1.next(); //ventana secundaria
 	     	
 	     	driver.switchTo().window(childWindow);
 	     	driver.findElement(By.xpath("//input[@id='search-field']")).sendKeys(shortName);
