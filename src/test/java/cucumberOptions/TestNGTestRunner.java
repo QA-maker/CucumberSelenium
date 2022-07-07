@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 @CucumberOptions(features="src/test/java/features", glue="stepDefinations",
-monochrome=true, dryRun=true)
+monochrome=true)
 public class TestNGTestRunner extends AbstractTestNGCucumberTests{
 	
 	
