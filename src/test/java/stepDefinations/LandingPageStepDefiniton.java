@@ -11,18 +11,26 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import junit.framework.Assert;
+import utils.TestContextSetup;
+
 
 
 public class LandingPageStepDefiniton {
-	public String landinPageproductName;
-	public String offerPage;
-	public WebDriver driver;
 	
+	public String offerPage;
+	public String landinPageproductName;
+	public WebDriver driver;
+	TestContextSetup testcontextsetup;
+	
+	public LandingPageStepDefiniton(TestContextSetup testcontextsetup) {
+		
+		this.testcontextsetup=testcontextsetup;
+	}
 	
 	 @Given("User is on GreenCart Landing page")
 	    public void user_is_on_greencart_landing_page() throws Throwable {
 	       System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
-		  driver= new ChromeDriver ();
+	       testcontextsetup.driver= new ChromeDriver ();
 				 driver.navigate().to("https://rahulshettyacademy.com/seleniumPractise");
 				 Thread.sleep(10000);
 				 
@@ -31,7 +39,7 @@ public class LandingPageStepDefiniton {
 	    @When("user searched with Shortname {string} abnd extract actual name of prodcut")
 	    public void user_searched_with_shortname_something_abnd_extract_actual_name_of_prodcut(String shortName) throws Throwable {
 	        
-	    	driver.findElement(By.xpath("//input[@type='search']")).sendKeys(shortName);
+	    	testcontextsetup.driver.findElement(By.xpath("//input[@type='search']")).sendKeys(shortName);
 	    	 landinPageproductName = driver.findElement(By.cssSelector("h4.product-name")).getText().split("-")[0].trim();
 	    	System.out.println(landinPageproductName + " '\t is extracted from home page");
 	    	}
