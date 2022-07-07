@@ -49,10 +49,10 @@ public class GreenKartStepDefiniton {
 	     	
 	     	driver.switchTo().window(childWindow);
 	     	driver.findElement(By.xpath("//input[@id='search-field']")).sendKeys(shortName);
-	     	Thread.sleep(2000);
+	     	Thread.sleep(3000);
 	     	 offerPage=driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
 	     	
-	     	System.out.println(offerPage + "Contains same Text");
+	     	System.out.println(offerPage + "\t Contains same Text");
 	     			     	
 	     	
 	    }
