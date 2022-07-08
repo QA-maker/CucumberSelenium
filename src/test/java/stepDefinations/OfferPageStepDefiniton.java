@@ -11,15 +11,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import junit.framework.Assert;
+import pageObjects.LandingPage;
+import pageObjects.OffersPage;
 import utils.TestContextSetup;
 
 
 public class OfferPageStepDefiniton {
+	String offerPage;
 	
-	public String offerPage;
+	
 	public WebDriver driver;
 	TestContextSetup testcontextsetup;
-	
+	//Single responability Principle	
 	public OfferPageStepDefiniton (TestContextSetup testcontextsetup) {
 		this.testcontextsetup=testcontextsetup;
 	}
@@ -28,21 +31,29 @@ public class OfferPageStepDefiniton {
 	    public void user_search_for_something_shortname_in_offers_page(String shortName) 
 	    		throws Throwable {
 	       
-	    	Thread.sleep(50000);
-	    	testcontextsetup.driver.findElement(By.linkText("Top Deals")).click();
+	    	Thread.sleep(10000);
+	    	
+	    	switchToOffersPage();
+	    	OffersPage offerPages= new OffersPage(testcontextsetup.driver);
+	    	offerPages.searchItems(shortName);
+	    	offerPage=offerPages.extractname();
+	     	Thread.sleep(3000);
+	     	
+	     	System.out.println(offerPages + "\t Contains same Text");
+	     			     	
+	     	
+	    }
+	    
+	    public void switchToOffersPage() {
+	    	//if switched to offer page -->skip below part
+	    	LandingPage landingpage=new LandingPage(testcontextsetup.driver);
+	    	landingpage.selectTopDeals();
 	     	Set <String> s1= driver.getWindowHandles(); //recuento total de ventanass abiertas
 	     	Iterator <String> i1=s1.iterator(); //recupera las ventanas y empeiza a contar
 	     	String parentWindow = i1.next(); //ventana princuoal
 	     	String childWindow= i1.next(); //ventana secundaria
-	     	
 	     	testcontextsetup.driver.switchTo().window(childWindow);
-	     	testcontextsetup.driver.findElement(By.xpath("//input[@id='search-field']")).sendKeys(shortName);
-	     	Thread.sleep(3000);
-	     	 offerPage=testcontextsetup.driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
-	     	
-	     	System.out.println(offerPage + "\t Contains same Text");
-	     			     	
-	     	
+	    	
 	    }
 	    
 	   
