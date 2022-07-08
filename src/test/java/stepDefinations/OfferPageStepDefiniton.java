@@ -13,6 +13,8 @@ import io.cucumber.java.en.When;
 import junit.framework.Assert;
 import pageObjects.LandingPage;
 import pageObjects.OffersPage;
+import pageObjects.PageObjectManager;
+import utils.GenericUtils;
 import utils.TestContextSetup;
 
 
@@ -22,6 +24,8 @@ public class OfferPageStepDefiniton {
 	
 	public WebDriver driver;
 	TestContextSetup testcontextsetup;
+	PageObjectManager pageObjectManager;
+	
 	//Single responability Principle	
 	public OfferPageStepDefiniton (TestContextSetup testcontextsetup) {
 		this.testcontextsetup=testcontextsetup;
@@ -31,28 +35,29 @@ public class OfferPageStepDefiniton {
 	    public void user_search_for_something_shortname_in_offers_page(String shortName) 
 	    		throws Throwable {
 	       
-	    	Thread.sleep(10000);
+	    	Thread.sleep(5000);
 	    	
 	    	switchToOffersPage();
-	    	OffersPage offerPages= new OffersPage(testcontextsetup.driver);
-	    	offerPages.searchItems(shortName);
-	    	offerPage=offerPages.extractname();
+	    	pageObjectManager= new PageObjectManager(testcontextsetup.driver);
+	    	OffersPage offerPage=pageObjectManager.getOffersPage();
+	    	
+	    	offerPage.searchItems(shortName);
+	    	offerPage.extractname();
+	    	String getofferPage = offerPage.extractname();
 	     	Thread.sleep(3000);
 	     	
-	     	System.out.println(offerPages + "\t Contains same Text");
+	     	System.out.println(offerPage + "\t Contains same Text");
 	     			     	
 	     	
 	    }
 	    
 	    public void switchToOffersPage() {
 	    	//if switched to offer page -->skip below part
-	    	LandingPage landingpage=new LandingPage(testcontextsetup.driver);
+	    	//pageObjectManager= new PageObjectManager(testcontextsetup.driver);
+	    	LandingPage landingpage=testcontextsetup.pageObjectManager.getLandingPage();
 	    	landingpage.selectTopDeals();
-	     	Set <String> s1= driver.getWindowHandles(); //recuento total de ventanass abiertas
-	     	Iterator <String> i1=s1.iterator(); //recupera las ventanas y empeiza a contar
-	     	String parentWindow = i1.next(); //ventana princuoal
-	     	String childWindow= i1.next(); //ventana secundaria
-	     	testcontextsetup.driver.switchTo().window(childWindow);
+	    	testcontextsetup.genericUtils.SwitchwindowToChild();
+	     
 	    	
 	    }
 	    

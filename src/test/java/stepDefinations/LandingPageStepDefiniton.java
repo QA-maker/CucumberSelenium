@@ -12,6 +12,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import junit.framework.Assert;
 import pageObjects.LandingPage;
+import pageObjects.PageObjectManager;
 import utils.TestContextSetup;
 
 
@@ -22,6 +23,7 @@ public class LandingPageStepDefiniton {
 	public String landinPageproductName;
 	public WebDriver driver;
 	TestContextSetup testcontextsetup;
+	PageObjectManager pageObjectManager;
 //Single responability Principle	
 	public LandingPageStepDefiniton(TestContextSetup testcontextsetup) {
 		
@@ -46,7 +48,7 @@ public class LandingPageStepDefiniton {
 	    	testcontextsetup.landinPageproductName=landinPage.getProductName().split("-")[0].trim();
 	    	
 	    	
-	    	System.out.println(landinPageproductName + " '\t is extracted from home page");
+	    	System.out.println(testcontextsetup.landinPageproductName + " '\t is extracted from home page");
 	    	}
 
 	    
