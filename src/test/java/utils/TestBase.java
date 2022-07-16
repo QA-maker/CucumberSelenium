@@ -20,13 +20,13 @@ public class TestBase {
 		String url =prop.getProperty("QAUrl");
 		if(driver==null) {
 		
-		if(prop.getProperty("browser") == "chrome") {//cuando eldriver no esta cargado
+		if(prop.getProperty("browser").equalsIgnoreCase("chrome")) {//cuando eldriver no esta cargado
 		System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"//src//test//resources//chromedriver.exe");
 	       driver= new ChromeDriver ();
 	       
 		}
 		
-		if(prop.getProperty("browser") == "firefox") {
+		if(prop.getProperty("browser").equalsIgnoreCase("firefox")) {
 			
 			//firefox code
 		}
