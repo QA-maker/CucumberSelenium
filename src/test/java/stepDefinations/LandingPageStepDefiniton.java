@@ -14,10 +14,6 @@ import utils.TestContextSetup;
 
 
 
-
-
-
-
 public class LandingPageStepDefiniton {
 	
 	public String offerPage;
@@ -39,10 +35,10 @@ public class LandingPageStepDefiniton {
 
 	    @When("user searched with Shortname {string} abnd extract actual name of prodcut")
 	    public void user_searched_with_shortname_something_abnd_extract_actual_name_of_prodcut(String shortName) throws Throwable {
-	    	Thread.sleep(100000);
+	    	Thread.sleep(50000);
 	    	LandingPage landinPage= new LandingPage(testcontextsetup.driver);
 	    	landinPage.searchItem(shortName);
-	    	Thread.sleep(100000);
+	    	Thread.sleep(10000);
 	    	testcontextsetup.landinPageproductName=landinPage.getProductName().split("-")[0].trim();
 	    	
 	    	
